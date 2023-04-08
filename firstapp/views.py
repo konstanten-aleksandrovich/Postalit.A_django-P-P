@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 def index(request):
-    return HttpResponse('<h2>Hellow world</h2>')
+    return render(request,'index.html')
 def about(request):
     return HttpResponse('<h2>О саите</h2>')
 def contact(request):
