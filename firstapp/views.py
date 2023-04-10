@@ -1,8 +1,18 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .forms import *
 
 def index(request):
-    return render(request,'index.html')
+    if request.method=="POST":
+        userform = UserForm(request.POST)
+        if userform.is_valid():
+            name=userform.cleaned_data['name']
+            age=userform.cleaned_data['age']
+            o=f'Имя {name} \n Возраст: {age}'
+            return HttpResponse(o)
+        return HttpResponse('Ошибка вода даных')
+    userform=UserForm()
+    return render(request,'firstapp/index.html',{'form':userform})
 def about(request):
     return HttpResponse('<h2>О саите</h2>')
 def contact(request):
